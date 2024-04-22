@@ -1,0 +1,14 @@
+﻿@page
+@model TelerikAspNetCoreApp1.Pages.Main.MyData;
+
+@(Html.Kendo().Grid<MyData>()
+    .Name("grid")
+    .Columns(columns =>
+    {
+        columns.Bound(p => p.UserId).Title("User ID");
+        columns.Bound(p => p.Id).Title("ID");
+        columns.Bound(p => p.Title).Title("Title");
+        columns.Bound(p => p.Completed).Title("Completed");
+    })
+    
+)

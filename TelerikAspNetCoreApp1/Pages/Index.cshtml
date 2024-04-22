@@ -1,0 +1,69 @@
+﻿@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Home page";
+}
+
+<h1>Final Question 2nd Part</h1>
+<p> Click main to view table </p>
+
+<div class="nav-list">
+    @{
+        string directoryName = "";
+    }
+    @foreach (var item in Model.fileNames)
+    {
+        if (@item.EndsWith("cshtml"))
+        {
+            var name = @item.Split(".")[0];
+            var href = "/" + directoryName + "/" + name;
+
+            <li class="nav-list-item"><a href="@href">@name</a>  </li>
+        }
+        else
+        {
+            directoryName = @item;
+            <h4 class="nav-list-header">@item</h4>
+        }
+    }
+</div>
+
+<script>
+    $(document).ready(function () {
+        var headers = $(".nav-list").find(".nav-list-header");
+
+        headers.each(function (i, e) {
+            var header = $(e);
+            var list = header.nextUntil(".nav-list-header").wrapAll("<ul class='nav-list-items-wrap'></ul>");
+
+            header.wrap("<div class='nav-list-col'></div>");
+            header.parent().append(list.parent());
+        });
+    });
+</script>
+
+<style>
+    .nav-list {
+        display: flex;
+        flex-wrap: wrap;
+    }
+
+    .nav-list-col {
+        flex: 1 1 50%;
+        min-width: 400px;
+    }
+
+    .nav-list-header {
+        margin-top: 30px;
+    }
+
+    .nav-list-items-wrap {
+        list-style: none;
+    }
+
+    .nav-list-item {
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+</style>
+
